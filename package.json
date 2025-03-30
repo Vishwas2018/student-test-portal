@@ -1,0 +1,28 @@
+{
+  "name": "student-test-portal",
+  "version": "1.0.0",
+  "description": "Web-based student test portal for Grades 2-6",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose up",
+    "dev": "docker-compose -f docker-compose.dev.yml up",
+    "install-all": "npm install && cd client && npm install && cd ../server && npm install",
+    "client": "cd client && npm start",
+    "server": "cd server && npm run dev",
+    "dev-local": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "cd client && npm test && cd ../server && npm test"
+  },
+  "keywords": [
+    "education",
+    "student",
+    "test",
+    "portal",
+    "australian",
+    "curriculum"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

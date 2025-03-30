@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+  # MongoDB service
+  mongo:
+    image: mongo:latest
+    container_name: student-portal-mongo-dev
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data-dev:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    networks:
+      - app-network-dev
+
+  # Backend service
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: student-portal-server-dev
+    restart: unless-stopped
+    ports:
+      - "${SERVER_PORT}:5000"
+    env_file: .env
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      - mongo
+    networks:
+      - app-network-dev
+    command: npm run dev
+
+  # Frontend service
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    container_name: student-portal-client-dev
+    restart: unless-stopped
+    ports:
+      - "${CLIENT_PORT}:3000"
+    env_file: .env
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - server
+    networks:
+      - app-network-dev
+    command: npm start
+
+networks:
+  app-network-dev:
+    driver: bridge
+
+volumes:
+  mongo-data-dev:
+    driver: local
+
