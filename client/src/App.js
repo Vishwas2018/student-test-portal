@@ -1,18 +1,19 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Layout from './components/layout/Layout';
-import Home from './pages/Home';
+import { Route, Routes } from 'react-router-dom';
+
 import About from './pages/About';
-import Help from './pages/Help';
-import Login from './components/auth/Login';
-import Signup from './components/auth/Signup';
-import PictureLogin from './components/auth/PictureLogin';
-import NotFound from './pages/NotFound';
-import ProtectedRoute from './components/auth/ProtectedRoute';
 import DashboardPage from './pages/DashboardPage';
-import ProfilePage from './pages/ProfilePage';
 import ExamPage from './pages/ExamPage';
+import Help from './pages/Help';
+import Home from './pages/Home';
+import Layout from './components/layout/Layout';
+import Login from './components/auth/Login';
+import NotFound from './pages/NotFound';
+import PictureLogin from './components/auth/PictureLogin';
+import ProfilePage from './pages/ProfilePage';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import React from 'react';
 import ResultsPage from './pages/ResultsPage';
+import Signup from './components/auth/Signup';
 
 function App() {
   return (
